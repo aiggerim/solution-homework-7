@@ -4,6 +4,7 @@ import MediatorPattern.aircraft.Aircraft;
 
 public interface TowerMediator {
     void broadcast(String msg, Aircraft sender);
-    boolean requestRunway(Aircraft a); // true if granted
+    boolean requestRunway(Aircraft a);
+    void mayday(Aircraft a);
 }
 
