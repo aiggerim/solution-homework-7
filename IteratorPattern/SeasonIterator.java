@@ -1,2 +1,4 @@
-package IteratorPattern;public class SeasonIterator {
+package IteratorPattern;
+
+public class SeasonIterator {
 }
