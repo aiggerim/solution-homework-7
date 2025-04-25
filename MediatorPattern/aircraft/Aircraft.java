@@ -1,4 +1,4 @@
-package MediatorPattern;
+package MediatorPattern.mediator;
 
 import MediatorPattern.TowerMediator;
 
