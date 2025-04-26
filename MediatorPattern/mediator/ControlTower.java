@@ -1,6 +1,11 @@
 package MediatorPattern.mediator;
 
 import MediatorPattern.aircraft.Aircraft;
+import MediatorPattern.scheduler.RunwayScheduler;
+import MediatorPattern.scheduler.FifoScheduler;
+
+
+import MediatorPattern.scheduler.FuelPriorityScheduler;
 
 import java.util.*;
 
@@ -9,6 +14,12 @@ public class ControlTower implements TowerMediator {
     private final Queue<Aircraft> landingQueue = new LinkedList<>();
     private final Queue<Aircraft> takeoffQueue = new LinkedList<>();
     private Aircraft runwayInUse = null;
+    private RunwayScheduler scheduler = new FifoScheduler();
+
+    public void setScheduler(FuelPriorityScheduler scheduler) {
+        this.scheduler = scheduler;
+    }
+
 
     public void register(Aircraft aircraft) {
         allAircraft.add(aircraft);
@@ -57,9 +68,11 @@ public class ControlTower implements TowerMediator {
         }
 
         if (!landingQueue.isEmpty()) {
-            Aircraft next = landingQueue.poll();
-            System.out.println("🛫 Granting runway to next: " + next.getId());
-            runwayInUse = next;
+            Aircraft next = scheduler.selectNext(landingQueue);
+            if (next != null) {
+                System.out.println("🛫 Granting runway to next: " + next.getId());
+                runwayInUse = next;
+            }
         }
     }
 }

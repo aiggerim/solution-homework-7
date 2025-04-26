@@ -2,6 +2,7 @@ package MediatorPattern.simulation;
 
 import MediatorPattern.aircraft.*;
 import MediatorPattern.mediator.*;
+import MediatorPattern.scheduler.FuelPriorityScheduler;
 
 import java.util.*;
 import java.util.concurrent.*;
@@ -9,10 +10,11 @@ import java.util.concurrent.*;
 public class Simulator {
     public static void main(String[] args) {
         ControlTower tower = new ControlTower();
+        tower.setScheduler(new FuelPriorityScheduler());
+
         Random rand = new Random();
         List<Aircraft> aircraftList = new ArrayList<>();
 
-        // Создание 10 случайных самолетов
         for (int i = 1; i <= 10; i++) {
             int type = rand.nextInt(3);
             int fuel = rand.nextInt(20) + 1;
