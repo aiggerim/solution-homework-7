@@ -1,0 +1,50 @@
+@startuml
+skinparam style strictuml
+skinparam classAttributeIconSize 0
+
+package "MediatorPattern.mediator" {
+    interface TowerMediator {
+        +broadcast(msg: String, sender: Aircraft)
+        +requestRunway(a: Aircraft): boolean
+        +mayday(a: Aircraft)
+    }
+
+    class ControlTower {
+        -allAircraft: List<Aircraft>
+        -landingQueue: Queue<Aircraft>
+        -takeoffQueue: Queue<Aircraft>
+        -runwayInUse: Aircraft
+        +register(a: Aircraft)
+        +broadcast(...)
+        +requestRunway(...)
+        +mayday(...)
+        +releaseRunway()
+    }
+
+    TowerMediator <|.. ControlTower
+}
+
+package "MediatorPattern.aircraft" {
+    abstract class Aircraft {
+        -id: String
+        -fuelLevel: int
+        -tower: TowerMediator
+        +send(msg: String)
+        +requestRunway()
+        +receive(msg: String)
+        +getFuelLevel(): int
+        +getId(): String
+    }
+
+    class PassengerPlane
+    class CargoPlane
+    class Helicopter
+
+    Aircraft <|-- PassengerPlane
+    Aircraft <|-- CargoPlane
+    Aircraft <|-- Helicopter
+}
+
+Aircraft --> TowerMediator : uses
+ControlTower --> Aircraft : manages
+@enduml
