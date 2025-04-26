@@ -18,4 +18,5 @@
 # Gradle / Maven
 .gradle/
 build/
+# Our changes
 out/
