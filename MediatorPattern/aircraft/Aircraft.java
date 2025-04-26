@@ -1,6 +1,6 @@
-package MediatorPattern.mediator;
+package MediatorPattern.aircraft;
 
-import MediatorPattern.TowerMediator;
+import MediatorPattern.mediator.TowerMediator;
 
 public abstract class Aircraft {
     protected String id;

@@ -1,7 +1,6 @@
 package MediatorPattern.aircraft;
 
-import MediatorPattern.mediator.Aircraft;
-import MediatorPattern.TowerMediator;
+import MediatorPattern.mediator.TowerMediator;
 
 public class CargoPlane extends Aircraft {
     public CargoPlane(String id, int fuel, TowerMediator tower) {
